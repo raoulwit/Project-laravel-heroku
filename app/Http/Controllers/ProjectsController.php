@@ -45,8 +45,15 @@ class ProjectsController extends Controller
 
     }
 
-    public function update() {
-      dd('Hello!');
+    public function update($id) {
+      $project = Project::find($id);
+
+      $project->title = request('title');
+      $project->description = request('description');
+
+      $project->save();
+
+      return redirect('/projects');
     }
 
     public function destroy() {
