@@ -11,11 +11,23 @@
 |
 */
 
+Route::patch('/tasks/{task}', 'ProjectTasksController@update');
+
+Route::view('/tust', 'tust', ['name' => 'Taylor']);
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('mur', function () {
+    return view('welcame');
+});
+
+Route::resource('huddos', 'HuddosController');
+
 Route::resource('projects', 'ProjectsController');
+
+
 /*
 Route::get('/projects', 'ProjectsController@index');
 

@@ -13,9 +13,12 @@ class ProjectsController extends Controller
 
       return view('projects.index', ['projects' => $projects]);
 
+
     }
 
-    public function show() {
+    public function show(Project $project) {
+
+      return view('projects.show', compact('project'));
 
     }
 
@@ -27,36 +30,38 @@ class ProjectsController extends Controller
 
     public function store() {
 
-      $project = new Project();
+      request()->validate([
+        'title' => ['required', 'min:3'],
+        'description' => ['required', 'min:3']
+      ]);
 
-      $project->title = request('title');
-      $project->description = request('description');
-
-      $project->save();
+      Project::create(request(['title', 'description']));
 
       return redirect('/projects');
+
     }
 
-    public function edit($id) {
+    public function edit(Project $project) {
 
-      $project = Project::find($id);
+
+    //  dd($project->title);
 
       return view('projects.edit', compact('project'));
 
     }
 
-    public function update($id) {
-      $project = Project::find($id);
-
-      $project->title = request('title');
-      $project->description = request('description');
-
-      $project->save();
+    public function update(Project $project) {
+      $project->update(request(['title', 'description']));
 
       return redirect('/projects');
     }
 
-    public function destroy() {
+    public function destroy(Project $project) {
+
+    //  dd('hedllo '.$id);
+      $project->delete();
+
+      return redirect('/projects');
 
     }
 

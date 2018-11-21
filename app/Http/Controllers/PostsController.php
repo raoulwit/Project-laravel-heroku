@@ -14,7 +14,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        //return view('projects.index');
+        $project = new App\Project;
+        $project->title = 'nog een titel';
+        $project->description = 'nog een beschrijving';
+        $project->save();
     }
 
     /**
